@@ -2,15 +2,19 @@ package com.alessandrosperotti.expandablecardviewexample;
 
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.view.animation.Transformation;
 import android.widget.ImageButton;
-
-import static android.content.ContentValues.TAG;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * Created by alessandros on 23/02/2018.
@@ -20,7 +24,19 @@ import static android.content.ContentValues.TAG;
 
 //TODO Aggiungi listeners iscollapsing/isExpanding
 
-public class ExpandableCardView extends CardView {
+public class ExpandableCardView extends LinearLayout {
+
+    private String title;
+
+    private View innerView;
+    private ViewGroup containerView;
+
+    private ImageButton arrowBtn;
+    private TextView textViewTitle;
+
+    private TypedArray typedArray;
+    private int innerViewRes;
+
 
     private final static int COLLAPSING = 0;
     private final static int EXPANDING = 1;
@@ -30,6 +46,7 @@ public class ExpandableCardView extends CardView {
     private boolean isCollapsing = false;
 
     private int previousHeight = 0;
+    private int innerViewHeight;
 
     public ExpandableCardView(Context context) {
         super(context);
@@ -37,10 +54,52 @@ public class ExpandableCardView extends CardView {
 
     public ExpandableCardView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        initAttributes(context, attrs);
+        initView(context);
     }
 
     public ExpandableCardView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        initAttributes(context, attrs);
+        initView(context);
+    }
+
+    private void initView(Context context){
+        //Inflating View
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater.inflate(R.layout.expandable_cardview, this);
+        containerView = (ViewGroup) findViewById(R.id.viewContainer);
+    }
+
+    private void initAttributes(Context context, AttributeSet attrs){
+        //Ottengo attributi
+        typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView);
+        title = typedArray.getString(R.styleable.ExpandableCardView_title);
+        innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID);
+        typedArray.recycle();
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+
+        //Una volta che la view è inflatata setto tutto
+
+        arrowBtn = findViewById(R.id.arrow);
+        textViewTitle = findViewById(R.id.title);
+
+        if(!TextUtils.isEmpty(title)) textViewTitle.setText(title);
+
+        //Inflato inner view
+        LayoutInflater inflater = (LayoutInflater) getContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        innerView = inflater.inflate(innerViewRes, null);
+        //innerView.setVisibility(View.INVISIBLE);
+
     }
 
     public void expand() {
@@ -50,32 +109,36 @@ public class ExpandableCardView extends CardView {
 
         if(!isMoving()) {
             previousHeight = initialHeight;
+            containerView.addView(innerView);
         }
 
         measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        int targetHeight = getMeasuredHeight();
+        int targetHeight = innerView.getMeasuredHeight() + initialHeight;
 
-        animateViews(initialHeight,
-                targetHeight - initialHeight,
-                EXPANDING);
+        if(targetHeight - initialHeight != 0) {
+            animateViews(initialHeight,
+                    targetHeight - initialHeight,
+                    EXPANDING);
+        }
     }
 
     public void collapse() {
         int initialHeight = getMeasuredHeight();
 
-        animateViews(initialHeight,
-                initialHeight - previousHeight,
-                COLLAPSING);
-    }
+        if(initialHeight - previousHeight != 0) {
+            animateViews(initialHeight,
+                    initialHeight - previousHeight,
+                    COLLAPSING);
+            //
+        }
 
+    }
 
     public boolean isExpanded() {
         return isExpanded;
     }
 
     private void animateViews(final int initialHeight, final int distance, final int animationType){
-
-        ImageButton arrowBtn = findViewById(R.id.arrow);
 
         Animation expandAnimation = new Animation() {
             @Override
@@ -84,6 +147,10 @@ public class ExpandableCardView extends CardView {
                     //Setting isExpanding/isCollapsing to false
                     isExpanding = false;
                     isCollapsing = false;
+
+                    if(animationType == COLLAPSING){
+                        containerView.removeView(innerView);
+                    }
                 }
 
                 getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
@@ -114,7 +181,6 @@ public class ExpandableCardView extends CardView {
 
         startAnimation(expandAnimation);
         arrowBtn.startAnimation(arrowAnimation);
-
         isExpanded = animationType == EXPANDING;
 
     }
@@ -128,6 +194,6 @@ public class ExpandableCardView extends CardView {
     }
 
     private boolean isMoving(){
-        return isExpanded() || isCollapsing();
+        return isExpanding() || isCollapsing();
     }
 }
