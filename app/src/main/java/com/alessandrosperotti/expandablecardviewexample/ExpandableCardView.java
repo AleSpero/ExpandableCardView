@@ -3,9 +3,9 @@ package com.alessandrosperotti.expandablecardviewexample;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +36,8 @@ public class ExpandableCardView extends LinearLayout {
 
     private TypedArray typedArray;
     private int innerViewRes;
+
+    private boolean firstTime = false;
 
 
     private final static int COLLAPSING = 0;
@@ -71,7 +73,6 @@ public class ExpandableCardView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.expandable_cardview, this);
-        containerView = (ViewGroup) findViewById(R.id.viewContainer);
     }
 
     private void initAttributes(Context context, AttributeSet attrs){
@@ -97,6 +98,8 @@ public class ExpandableCardView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
+        containerView = findViewById(R.id.viewContainer);
+
         innerView = inflater.inflate(innerViewRes, null);
         //innerView.setVisibility(View.INVISIBLE);
 
@@ -116,6 +119,10 @@ public class ExpandableCardView extends LinearLayout {
         int targetHeight = innerView.getMeasuredHeight() + initialHeight;
 
         if(targetHeight - initialHeight != 0) {
+            if(firstTime) {
+                containerView.getLayoutParams().height = initialHeight;
+                firstTime = false;
+            }
             animateViews(initialHeight,
                     targetHeight - initialHeight,
                     EXPANDING);
@@ -129,7 +136,6 @@ public class ExpandableCardView extends LinearLayout {
             animateViews(initialHeight,
                     initialHeight - previousHeight,
                     COLLAPSING);
-            //
         }
 
     }
@@ -153,9 +159,13 @@ public class ExpandableCardView extends LinearLayout {
                     }
                 }
 
-                getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
-                        (int) (initialHeight - (distance * interpolatedTime));
-                requestLayout();
+                    getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
+                            (int) (initialHeight - (distance * interpolatedTime));
+                    requestLayout();
+
+                Log.d("Animation", ""+containerView.getHeight() + " "+ interpolatedTime);
+
+
             }
 
             @Override
@@ -180,6 +190,7 @@ public class ExpandableCardView extends LinearLayout {
         isCollapsing = animationType == COLLAPSING;
 
         startAnimation(expandAnimation);
+        Log.d("SO","Started animation: "+ (animationType == EXPANDING ? "Expanding" : "Collapsing"));
         arrowBtn.startAnimation(arrowAnimation);
         isExpanded = animationType == EXPANDING;
 
