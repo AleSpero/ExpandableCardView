@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ExpandableCardView.iml" filepath="$PROJECT_DIR$/ExpandableCardView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ExpandableCardView.iml" filepath="$PROJECT_DIR$/ExpandableCardView.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/expandablecardview/expandablecardview.iml" filepath="$PROJECT_DIR$/expandablecardview/expandablecardview.iml" />
     </modules>
   </component>
 </project>

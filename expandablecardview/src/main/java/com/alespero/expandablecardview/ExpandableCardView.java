@@ -1,4 +1,4 @@
-package com.alessandrosperotti.expandablecardviewexample;
+package com.alespero.expandablecardview;
 
 
 import android.content.Context;
