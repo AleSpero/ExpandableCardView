@@ -11,7 +11,7 @@
         <LinearLayout
             android:id="@+id/viewContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/default_card_height"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -42,6 +42,12 @@
                     android:src="@drawable/arrow_down"/>
 
             </RelativeLayout>
+
+            <ViewStub
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/viewStub"
+                android:inflatedId="@+id/innerView"/>
 
 
         </LinearLayout>
