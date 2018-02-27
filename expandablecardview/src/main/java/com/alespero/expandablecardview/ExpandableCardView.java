@@ -105,7 +105,7 @@ public class ExpandableCardView extends LinearLayout {
 
         ViewStub stub = findViewById(R.id.viewStub);
         stub.setLayoutResource(innerViewRes);
-        stub.inflate();
+        innerView = stub.inflate();
         //innerView.setVisibility(View.INVISIBLE);
 
     }
@@ -155,20 +155,12 @@ public class ExpandableCardView extends LinearLayout {
                     isCollapsing = false;
                 }
 
-                getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
-                        (int) (initialHeight - (distance * interpolatedTime));
-                requestLayout();
+                card.getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
+                        (int) (initialHeight  - (distance * interpolatedTime));
+                card.findViewById(R.id.viewContainer).requestLayout();
 
-
-                    card.getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
-                            (int) (initialHeight - (distance * interpolatedTime));
-                    card.requestLayout();
-
-                    findViewById(R.id.innerView).getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
-                            (int) (initialHeight - (distance * interpolatedTime));
-                findViewById(R.id.innerView).requestLayout();
-
-
+                ((View) findViewById(R.id.viewContainer)).getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
+                        (int) (initialHeight  - (distance * interpolatedTime));
 
             }
 
