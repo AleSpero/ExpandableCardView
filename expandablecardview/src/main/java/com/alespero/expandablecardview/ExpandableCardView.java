@@ -106,6 +106,8 @@ public class ExpandableCardView extends LinearLayout {
         ViewStub stub = findViewById(R.id.viewStub);
         stub.setLayoutResource(innerViewRes);
         innerView = stub.inflate();
+
+        setElevation(Utils.convertDpToPixels(getContext(), 4));
         //innerView.setVisibility(View.INVISIBLE);
 
     }
