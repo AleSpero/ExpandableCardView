@@ -66,7 +66,8 @@ public class ExpandableCardView extends LinearLayout {
     private boolean isCollapsing = false;
 
     private int previousHeight = 0;
-    private int innerViewHeight;
+
+    private OnExpandedListener listener;
 
     public ExpandableCardView(Context context) {
         super(context);
@@ -112,25 +113,21 @@ public class ExpandableCardView extends LinearLayout {
 
         if(!TextUtils.isEmpty(title)) textViewTitle.setText(title);
 
-        //Inflato inner view
-        LayoutInflater inflater = (LayoutInflater) getContext()
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         card = findViewById(R.id.card);
 
         ViewStub stub = findViewById(R.id.viewStub);
         stub.setLayoutResource(innerViewRes);
         innerView = stub.inflate();
 
+        containerView = findViewById(R.id.viewContainer);
+
         setElevation(Utils.convertDpToPixels(getContext(), 4));
-        //innerView.setVisibility(View.INVISIBLE);
 
     }
 
     public void expand() {
 
         final int initialHeight = card.getHeight();
-
 
         if(!isMoving()) {
             previousHeight = initialHeight;
@@ -170,13 +167,22 @@ public class ExpandableCardView extends LinearLayout {
                     //Setting isExpanding/isCollapsing to false
                     isExpanding = false;
                     isCollapsing = false;
+
+                    if(listener != null){
+                        if(animationType == EXPANDING){
+                            listener.onExpanded(card);
+                        }
+                        else{
+                            listener.onCollapsed(card);
+                        }
+                    }
                 }
 
                 card.getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
                         (int) (initialHeight  - (distance * interpolatedTime));
                 card.findViewById(R.id.viewContainer).requestLayout();
 
-                ((View) findViewById(R.id.viewContainer)).getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
+                containerView.getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
                         (int) (initialHeight  - (distance * interpolatedTime));
 
             }
@@ -220,4 +226,26 @@ public class ExpandableCardView extends LinearLayout {
     private boolean isMoving(){
         return isExpanding() || isCollapsing();
     }
+
+    public void setOnExpandedListener(OnExpandedListener listener) {
+        this.listener = listener;
+    }
+
+    public void removeOnExpandedListener(){
+        this.listener = null;
+    }
+
+    /**
+     * Interfaces
+     */
+
+    public interface OnExpandedListener {
+
+        void onExpanded(View v);
+
+        void onCollapsed(View v);
+    }
+
 }
+
+
