@@ -1,6 +1,7 @@
 # ExpandableCardView
 Simple expandable CardView for Android.
 Please note that this library is still in early development stage!
+
 This readme is WIP
 
 ## Description
@@ -15,11 +16,11 @@ Soon available on the Google Play Store.
 
 ## Getting the Library
 
-First of all, get the library by cloning this repo (soon it will be available by jar and by maven central)
+First of all, get the library by cloning this repo (soon it will be available by Jar and by Maven Central)
 
 ## Declaring the view
 
-After you have the Library, setup, just declare the ExpandableCardView in your xml:
+After you have the Library correctly setup, just declare the ExpandableCardView in your xml:
 
 ```xml
 <com.alespero.expandablecardview.ExpandableCardView
