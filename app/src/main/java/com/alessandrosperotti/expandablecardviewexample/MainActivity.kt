@@ -14,10 +14,10 @@ class MainActivity : AppCompatActivity() {
 
         val card : ExpandableCardView = findViewById(R.id.mycard)
 
-        card.setOnClickListener({
+        /*card.setOnClickListener({
             if(card.isExpanded) card.collapse()
             else card.expand()
-        })
+        })*/
 
         card.setOnExpandedListener(object : ExpandableCardView.OnExpandedListener {
             override fun onCollapsed(v: View) {

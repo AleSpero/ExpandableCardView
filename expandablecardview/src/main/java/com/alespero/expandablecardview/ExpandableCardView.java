@@ -39,8 +39,6 @@ import android.widget.TextView;
  * @author Alessandro Sperotti
  */
 
-//TODO Aggiungi listeners iscollapsing/isExpanding
-
 public class ExpandableCardView extends LinearLayout {
 
     private String title;
@@ -64,6 +62,7 @@ public class ExpandableCardView extends LinearLayout {
     private boolean isExpanded = false;
     private boolean isExpanding = false;
     private boolean isCollapsing = false;
+    private boolean expandOnClick = false;
 
     private int previousHeight = 0;
 
@@ -99,6 +98,7 @@ public class ExpandableCardView extends LinearLayout {
         typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView);
         title = typedArray.getString(R.styleable.ExpandableCardView_title);
         innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID);
+        expandOnClick = typedArray.getBoolean(R.styleable.ExpandableCardView_expandOnClick, false);
         typedArray.recycle();
     }
 
@@ -122,6 +122,16 @@ public class ExpandableCardView extends LinearLayout {
         containerView = findViewById(R.id.viewContainer);
 
         setElevation(Utils.convertDpToPixels(getContext(), 4));
+
+        if(expandOnClick){
+            setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isExpanded()) collapse();
+                    else expand();
+                }
+            });
+        }
 
     }
 

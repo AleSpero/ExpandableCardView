@@ -1,15 +1,19 @@
 apply plugin: 'com.android.library'
 
+ext {
+    PUBLISH_GROUP_ID = 'com.alespero'
+    PUBLISH_ARTIFACT_ID = 'expandable-cardview'
+    PUBLISH_VERSION = '0.5'
+}
+
 android {
     compileSdkVersion 26
-
-
 
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "1.0"
+        versionName "0.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -33,4 +37,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation "com.android.support:cardview-v7:26.1.0"
 
+    apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
 }
