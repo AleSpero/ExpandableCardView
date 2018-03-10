@@ -12,22 +12,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val card : ExpandableCardView = findViewById(R.id.mycard)
+        val card : ExpandableCardView = findViewById(R.id.profile)
 
-        /*card.setOnClickListener({
-            if(card.isExpanded) card.collapse()
-            else card.expand()
-        })*/
-
-        card.setOnExpandedListener(object : ExpandableCardView.OnExpandedListener {
-            override fun onCollapsed(v: View) {
-                Toast.makeText(applicationContext, "Collapsed!", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onExpanded(v: View) {
-                Toast.makeText(applicationContext, "Expanded!", Toast.LENGTH_SHORT).show()
-            }
-        })
+        card.setOnExpandedListener { _, isExpanded ->
+            if(isExpanded) Toast.makeText(applicationContext, "Expanded!", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(applicationContext, "Collapsed!", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

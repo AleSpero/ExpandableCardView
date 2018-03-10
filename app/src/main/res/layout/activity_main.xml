@@ -4,16 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:clipChildren="false"
     tools:context="com.alessandrosperotti.expandablecardviewexample.MainActivity"
     android:background="#FAFAFA">
 
 <com.alespero.expandablecardview.ExpandableCardView
-    android:id="@+id/mycard"
-    android:layout_margin="20dp"
+    android:id="@+id/profile"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:title="Item"
+    app:title="Passengers"
+    app:icon="@drawable/ic_person"
     app:inner_view="@layout/mycustomview"
     app:expandOnClick="true"/>
+
+    <com.alespero.expandablecardview.ExpandableCardView
+        android:id="@+id/location"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:title="Location"
+        app:icon="@drawable/ic_location"
+        app:inner_view="@layout/mycustomview"
+        app:expandOnClick="true"/>
+
+    <com.alespero.expandablecardview.ExpandableCardView
+        android:id="@+id/dates"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:title="Calendar"
+        app:icon="@drawable/ic_dates"
+        app:inner_view="@layout/mycustomview"
+        app:expandOnClick="true"/>
+
+    <com.alespero.expandablecardview.ExpandableCardView
+        android:id="@+id/flight"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:title="My Flight"
+        app:icon="@drawable/ic_plane"
+        app:inner_view="@layout/mycustomview"
+        app:expandOnClick="true"/>
 </LinearLayout>
