@@ -16,7 +16,13 @@ Soon available on the Google Play Store.
 
 ## Getting the Library
 
-First of all, get the library by cloning this repo (soon it will be available by Jar and by Maven Central)
+First of all, include the dependency in your app build.gradle:
+
+```gradle
+compile 'com.alespero:expandable-cardview:0.5'
+```
+
+Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
 
 ## Declaring the view
 
@@ -24,32 +30,37 @@ After you have the Library correctly setup, just declare the ExpandableCardView 
 
 ```xml
 <com.alespero.expandablecardview.ExpandableCardView
-    android:id="@+id/mycard"
+    android:id="@+id/profile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:title="Item"
-    app:inner_view="@layout/mycustomview"/>
+    app:title="Passengers"
+    app:icon="@drawable/ic_person"
+    app:inner_view="@layout/mycustomview"
+    app:expandOnClick="true"/>
 ```
 
-You can specify a custom title on the header on the card by setting the attribute ```app:title```.
-After you created the base xml, just create your custom layout and place it inside your ```layout``` folder. Now just set pass your newly created layout resource to the ```app:inner_view``` attribute. Done! Now your ExpandableCardView is ready to roll. (More attributes soon to come)
+You can specify a custom title and icon on the header on the card by setting the attribute ```app:title``` and  ```app:icon``` respectively.
+
+After you created the base xml, just create your custom layout and place it inside your ```layout``` folder. Now just set pass your newly created layout resource to the ```app:inner_view``` attribute. By setting the attribute ```app:expandOnClick="true"``` the card will have a default behaviour (expand/collapse on click)
+
+Done! Now your ExpandableCardView is ready to roll.
 
 ## Usage
 
 All you need to do now is to just declare your ExpandableCardView in your activity and you're ready to use its methods.
 
 ### Java
-Too lazy to write Java example right now, sorry :P
+```java
+ExpandableCardView card = findViewById(R.id.profile);
 
+ //Do stuff here
+```
 ### Kotlin
 
 ```kotlin
-val card : ExpandableCardView = findViewById(R.id.mycard)
+val card : ExpandableCardView = findViewById(R.id.profile)
 
-        card.setOnClickListener({
-            if(card.isExpanded) card.collapse()
-            else card.expand()
-        })
+ //Do stuff here
 ```
 
 You can use ```expand()``` and ```collapse()``` to respectively expand and collapse the card, and use ```isExpanded()``` to check if the card is expanded or not.
@@ -57,20 +68,20 @@ You can use ```expand()``` and ```collapse()``` to respectively expand and colla
 You can also set an OnExpandedListener to the card:
 
 ### Java
-Too lazy to write Java example right now, sorry :P
-
+```java
+        card.setOnExpandedListener(new OnExpandedListener() {
+            @Override
+            public void onExpandChanged(View v, boolean isExpanded) {
+                Toast.makeText(applicationContext, isExpanded ? "Expanded!" : "Collapsed!", Toast.LENGTH_SHORT).show();
+            }
+        });
+```
 ### Kotlin
 
 ```kotlin
- card.setOnExpandedListener(object : ExpandableCardView.OnExpandedListener {
-            override fun onCollapsed(v: View) {
-                Toast.makeText(applicationContext, "Collapsed!", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onExpanded(v: View) {
-                Toast.makeText(applicationContext, "Expanded!", Toast.LENGTH_SHORT).show()
-            }
-        })
+        card.setOnExpandedListener { view, isExpanded ->
+            Toast.makeText(applicationContext, if(isExpanded) "Expanded!" else "Collapsed!", Toast.LENGTH_SHORT).show()
+        }
 ```
 ## Contribute
 
