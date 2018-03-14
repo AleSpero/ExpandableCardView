@@ -12,8 +12,6 @@ Soon available on the Google Play Store.
 
 # Setup
 
-## Getting the Library
-
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
