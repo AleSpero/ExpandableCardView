@@ -1,12 +1,10 @@
 # ExpandableCardView
-Simple expandable CardView for Android.
+
+An Android library that lets you create in a simple, fast and hassle-free way a CardView in which you can insert your custom layout and just expand and collapse without even writing a single Java/Kotlin line of code.
+
+This component follows the [Material Design Guidelines](https://material.io/guidelines/).
+
 Please note that this library is still in early development stage!
-
-This readme is WIP
-
-## Description
-
-WIP
 
 ## Demo
 
@@ -41,13 +39,15 @@ After you have the Library correctly setup, just declare the ExpandableCardView 
 
 You can specify a custom title and icon on the header on the card by setting the attribute ```app:title``` and  ```app:icon``` respectively.
 
-After you created the base xml, just create your custom layout and place it inside your ```layout``` folder. Now just set pass your newly created layout resource to the ```app:inner_view``` attribute. By setting the attribute ```app:expandOnClick="true"``` the card will have a default behaviour (expand/collapse on click)
+After you created the base xml, just create your custom layout and place it inside your ```layout``` folder.
+
+Now just pass your newly created layout resource to the ```app:inner_view``` attribute. By setting the attribute ```app:expandOnClick="true"``` the card will have a default behaviour (expand/collapse on click)
 
 Done! Now your ExpandableCardView is ready to roll.
 
 ## Usage
 
-All you need to do now is to just declare your ExpandableCardView in your activity and you're ready to use its methods.
+If you want some basic Expandable Card without any custom behaviour, setting the view in the XML is enough. Otherwise just declare your ExpandableCardView in your Activity/Fragment and you're ready to use its methods.
 
 ### Java
 ```java
