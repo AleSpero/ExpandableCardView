@@ -67,19 +67,19 @@ You can also set an OnExpandedListener to the card:
 
 ### Java
 ```java
-        card.setOnExpandedListener(new OnExpandedListener() {
-            @Override
-            public void onExpandChanged(View v, boolean isExpanded) {
-                Toast.makeText(applicationContext, isExpanded ? "Expanded!" : "Collapsed!", Toast.LENGTH_SHORT).show();
-            }
-        });
+card.setOnExpandedListener(new OnExpandedListener() {
+    @Override
+    public void onExpandChanged(View v, boolean isExpanded) {
+        Toast.makeText(applicationContext, isExpanded ? "Expanded!" : "Collapsed!", Toast.LENGTH_SHORT).show();
+    }
+});
 ```
 ### Kotlin
 
 ```kotlin
-        card.setOnExpandedListener { view, isExpanded ->
-            Toast.makeText(applicationContext, if(isExpanded) "Expanded!" else "Collapsed!", Toast.LENGTH_SHORT).show()
-        }
+card.setOnExpandedListener { view, isExpanded ->
+    Toast.makeText(applicationContext, if(isExpanded) "Expanded!" else "Collapsed!", Toast.LENGTH_SHORT).show()
+ }
 ```
 ## Contribute
 
