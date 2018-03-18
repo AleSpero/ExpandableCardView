@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +12,7 @@
     android:clipChildren="false"
     tools:context="com.alessandrosperotti.expandablecardviewexample.MainActivity"
     android:background="#FAFAFA">
+
 
 <com.alespero.expandablecardview.ExpandableCardView
     android:id="@+id/profile"
@@ -45,7 +50,7 @@
         android:layout_height="wrap_content"
         app:title="Calendar"
         app:icon="@drawable/ic_dates"
-        app:inner_view="@layout/mycustomview"
+        app:inner_view="@layout/dates"
         app:expandOnClick="true"/>
 
     <com.alespero.expandablecardview.ExpandableCardView
@@ -60,4 +65,8 @@
         app:icon="@drawable/ic_plane"
         app:inner_view="@layout/mycustomview"
         app:expandOnClick="true"/>
+
 </LinearLayout>
+
+</ScrollView>
+
