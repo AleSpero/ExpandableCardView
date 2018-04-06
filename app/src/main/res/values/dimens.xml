@@ -2,4 +2,6 @@
 <resources>
     <dimen name="default_card_height">50dp</dimen>
     <dimen name="default_vertical_padding">10dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
+    <dimen name="margin_small">20dp</dimen>
 </resources>
