@@ -2,8 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/margin_medium"
-    android:gravity="center_horizontal">
+    android:paddingTop="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/mylocation"
@@ -18,6 +17,8 @@
         android:id="@+id/map"
         android:layout_marginLeft="@dimen/margin_medium"
         android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/screenn"
         android:layout_width="300dp"
         android:layout_height="150dp"
         android:layout_below="@id/mylocation"/>
