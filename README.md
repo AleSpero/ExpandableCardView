@@ -1,5 +1,7 @@
 # ExpandableCardView
 
+![Example Gif](demo.gif)
+
 An Android library that lets you create in a simple, fast and hassle-free way a CardView in which you can insert your custom layout and just expand and collapse without even writing a single Java/Kotlin line of code.
 
 This component follows the [Material Design Guidelines](https://material.io/guidelines/).
@@ -8,7 +10,7 @@ Please note that this library is still in early development stage!
 
 ## Demo
 
-Soon available on the Google Play Store.
+Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=com.alessandrosperotti.expandablecardviewexample).
 
 # Setup
 
