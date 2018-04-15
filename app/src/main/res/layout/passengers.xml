@@ -39,7 +39,7 @@
 </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical">
@@ -59,12 +59,6 @@
             android:text="OAKTHXBAI"
             android:textStyle="bold" />
 
-        <ImageButton
-            android:layout_marginLeft="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_copy"
-            android:background="?selectableItemBackground" />
 
     </LinearLayout>
 
