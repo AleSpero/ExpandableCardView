@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -259,6 +260,29 @@ public class ExpandableCardView extends LinearLayout {
     public void removeOnExpandedListener(){
         this.listener = null;
     }
+
+    public void setTitle(String title){
+        if(textViewTitle != null) textViewTitle.setText(title);
+    }
+
+    public void setTitle(int resId){
+        if(textViewTitle != null) textViewTitle.setText(resId);
+    }
+
+    public void setIcon(Drawable drawable){
+        if(headerIcon != null){
+            headerIcon.setBackground(drawable);
+            iconDrawable = drawable;
+        }
+    }
+
+    public void setIcon(int resId){
+        if(headerIcon != null){
+            iconDrawable = ContextCompat.getDrawable(getContext(), resId);
+            headerIcon.setBackground(iconDrawable);
+        }
+    }
+
 
     @Override
     public void setOnClickListener(@Nullable OnClickListener l) {
