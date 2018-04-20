@@ -1,5 +1,7 @@
 # ExpandableCardView
 
+[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.6) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.6/link)
+
 ![Example Gif](demo.gif)
 
 An Android library that lets you create in a simple, fast and hassle-free way a CardView in which you can insert your custom layout and just expand and collapse without even writing a single Java/Kotlin line of code.
@@ -64,6 +66,7 @@ val card : ExpandableCardView = findViewById(R.id.profile)
 ```
 
 You can use ```expand()``` and ```collapse()``` to respectively expand and collapse the card, and use ```isExpanded()``` to check if the card is expanded or not.
+You can change the title and icon of the card dynamically by using ```setTitle()``` and ```setIcon()``` methods.
 
 You can also set an OnExpandedListener to the card:
 
