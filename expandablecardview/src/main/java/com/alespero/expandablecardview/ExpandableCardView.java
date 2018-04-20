@@ -136,9 +136,7 @@ public class ExpandableCardView extends LinearLayout {
 
         card = findViewById(R.id.card);
 
-        ViewStub stub = findViewById(R.id.viewStub);
-        stub.setLayoutResource(innerViewRes);
-        innerView = stub.inflate();
+        setInnerView(innerViewRes);
 
         containerView = findViewById(R.id.viewContainer);
 
@@ -281,6 +279,12 @@ public class ExpandableCardView extends LinearLayout {
             iconDrawable = ContextCompat.getDrawable(getContext(), resId);
             headerIcon.setBackground(iconDrawable);
         }
+    }
+
+    private void setInnerView(int resId){
+        ViewStub stub = findViewById(R.id.viewStub);
+        stub.setLayoutResource(resId);
+        innerView = stub.inflate();
     }
 
 
