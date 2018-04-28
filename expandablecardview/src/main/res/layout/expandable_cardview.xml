@@ -36,7 +36,7 @@
                     android:layout_marginLeft="10dp"
                     android:text="Prova"
                     android:maxLines="1"
-                    android:maxLength="35"
+                    android:maxLength="39"
                     android:layout_toEndOf="@+id/icon"
                     android:textColor="@android:color/primary_text_light" />
 
