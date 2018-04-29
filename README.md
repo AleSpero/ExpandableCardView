@@ -1,6 +1,6 @@
 # ExpandableCardView
 
-[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.6) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.6/link)
+[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.7) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.7/link)
 
 ![Example Gif](demo.gif)
 
@@ -19,7 +19,7 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
-compile 'com.alespero:expandable-cardview:0.6'
+compile 'com.alespero:expandable-cardview:0.7'
 ```
 
 Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
