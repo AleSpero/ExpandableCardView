@@ -63,7 +63,7 @@
     app:title="Passengers"
     app:icon="@drawable/ic_person"
     app:inner_view="@layout/passengers"
-    app:expandOnClick="true"/>
+    app:expandOnClick="true" />
 
     <com.alespero.expandablecardview.ExpandableCardView
         android:id="@+id/location"
@@ -89,7 +89,8 @@
         app:title="Calendar"
         app:icon="@drawable/ic_dates"
         app:inner_view="@layout/dates"
-        app:expandOnClick="true"/>
+        app:expandOnClick="true"
+        app:animationDuration="900"/>
 
 </LinearLayout>
 

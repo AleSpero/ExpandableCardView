@@ -59,7 +59,8 @@ public class ExpandableCardView extends LinearLayout {
 
     private CardView card;
 
-    public static final long ANIM_DURATION = 350;
+    public static final int DEFAULT_ANIM_DURATION = 350;
+    private long animDuration = DEFAULT_ANIM_DURATION;
 
     private final static int COLLAPSING = 0;
     private final static int EXPANDING = 1;
@@ -113,6 +114,7 @@ public class ExpandableCardView extends LinearLayout {
         iconDrawable = typedArray.getDrawable(R.styleable.ExpandableCardView_icon);
         innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID);
         expandOnClick = typedArray.getBoolean(R.styleable.ExpandableCardView_expandOnClick, false);
+        animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION);
         typedArray.recycle();
     }
 
@@ -226,8 +228,8 @@ public class ExpandableCardView extends LinearLayout {
         arrowAnimation.setFillAfter(true);
 
 
-        arrowAnimation.setDuration(ANIM_DURATION);
-        expandAnimation.setDuration(ANIM_DURATION);
+        arrowAnimation.setDuration(animDuration);
+        expandAnimation.setDuration(animDuration);
 
         isExpanding = animationType == EXPANDING;
         isCollapsing = animationType == COLLAPSING;
@@ -292,6 +294,14 @@ public class ExpandableCardView extends LinearLayout {
     public void setOnClickListener(@Nullable OnClickListener l) {
         if(arrowBtn != null) arrowBtn.setOnClickListener(l);
         super.setOnClickListener(l);
+    }
+
+    public long getAnimDuration() {
+        return animDuration;
+    }
+
+    public void setAnimDuration(long animDuration) {
+        this.animDuration = animDuration;
     }
 
 

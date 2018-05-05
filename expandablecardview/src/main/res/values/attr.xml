@@ -5,5 +5,6 @@
         <attr name="icon" format="reference"/>
         <attr name="inner_view" format="reference"/>
         <attr name="expandOnClick" format="boolean"/>
+        <attr name="animationDuration" format="integer"/>
     </declare-styleable>
 </resources>
