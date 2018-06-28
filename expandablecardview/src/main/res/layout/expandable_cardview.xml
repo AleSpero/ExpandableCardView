@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    card_view:cardElevation="8dp"
+    card_view:cardCornerRadius="8dp"
+    android:paddingTop="@dimen/default_vertical_padding"
+    android:paddingBottom="@dimen/default_vertical_padding">
+        <LinearLayout
+            android:id="@+id/viewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_card_height"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_card_height"
+                android:id="@+id/header"
+                android:gravity="center_vertical">
+
+                <!-- Rivedi effetto ripple -->
+
+                <ImageButton
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Prova"
+                    android:maxLines="1"
+                    android:maxLength="39"
+                    android:layout_toEndOf="@+id/icon"
+                    android:textColor="@android:color/primary_text_light" />
+
+                <ImageButton
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/arrow_down"/>
+
+            </RelativeLayout>
+
+            <ViewStub
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/viewStub"
+                android:inflatedId="@+id/innerView"/>
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>

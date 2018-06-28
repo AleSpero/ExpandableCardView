@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_medium">
+
+    <TextView
+        android:id="@+id/mylocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Location"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/margin_small"/>
+
+    <ImageView
+        android:id="@+id/map"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/screenn"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/mylocation"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_small"
+        android:backgroundTint="#e0e0e0"
+        android:background="#e0e0e0"
+        android:layout_above="@+id/buttonMaps"/>
+
+    <Button
+        android:id="@+id/buttonMaps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View on Google Maps"
+        android:layout_alignParentRight="true"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:textColor="@color/colorAccent"
+        android:layout_below="@id/map"/>
+
+</RelativeLayout>
