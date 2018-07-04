@@ -69,6 +69,7 @@ public class ExpandableCardView extends LinearLayout {
     private boolean isExpanding = false;
     private boolean isCollapsing = false;
     private boolean expandOnClick = false;
+    private boolean startExpanded = false;
 
     private int previousHeight = 0;
 
@@ -115,6 +116,7 @@ public class ExpandableCardView extends LinearLayout {
         innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID);
         expandOnClick = typedArray.getBoolean(R.styleable.ExpandableCardView_expandOnClick, false);
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION);
+        startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false);
         typedArray.recycle();
     }
 
@@ -143,6 +145,12 @@ public class ExpandableCardView extends LinearLayout {
         containerView = findViewById(R.id.viewContainer);
 
         setElevation(Utils.convertDpToPixels(getContext(), 4));
+
+        if(startExpanded){
+            setAnimDuration(0);
+            expand();
+            setAnimDuration(animDuration);
+        }
 
         if(expandOnClick){
             card.setOnClickListener(defaultClickListener);
