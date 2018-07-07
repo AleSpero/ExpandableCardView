@@ -1,6 +1,6 @@
 # ExpandableCardView
 
-[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.7) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.7/link)
+[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.8/link)
 
 ![Example Gif](demo.gif)
 
@@ -19,7 +19,7 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
-compile 'com.alespero:expandable-cardview:0.7'
+compile 'com.alespero:expandable-cardview:0.8'
 ```
 
 Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
@@ -36,14 +36,17 @@ After you have the Library correctly setup, just declare the ExpandableCardView 
     app:title="Passengers"
     app:icon="@drawable/ic_person"
     app:inner_view="@layout/mycustomview"
-    app:expandOnClick="true"/>
+    app:expandOnClick="true"
+    app:animationDuration="300"
+    app:startExpanded="false"/>
 ```
+The only required attributes are `inner_view` and `title`. The other attributes are optional.
 
 You can specify a custom title and icon on the header on the card by setting the attribute ```app:title``` and  ```app:icon``` respectively.
 
 After you created the base xml, just create your custom layout and place it inside your ```layout``` folder.
 
-Now just pass your newly created layout resource to the ```app:inner_view``` attribute. By setting the attribute ```app:expandOnClick="true"``` the card will have a default behaviour (expand/collapse on click)
+Now just pass your newly created layout resource to the ```app:inner_view``` attribute. By setting the attribute ```app:expandOnClick="true"``` the card will have a default behaviour (expand/collapse on click); By setting the `animationDuration` attribute you can set a custom animation time, and by setting the `startExpanded` attribute the card will be automatically expanded when inflated.
 
 Done! Now your ExpandableCardView is ready to roll.
 
