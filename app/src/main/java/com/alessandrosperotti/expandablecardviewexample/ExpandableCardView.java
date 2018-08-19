@@ -3,6 +3,8 @@ package com.alessandrosperotti.expandablecardviewexample;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -30,12 +32,14 @@ public class ExpandableCardView extends LinearLayout {
 
     private View innerView;
     private ViewGroup containerView;
+    private ViewGroup header;
 
     private ImageButton arrowBtn;
     private TextView textViewTitle;
 
     private TypedArray typedArray;
     private int innerViewRes;
+
 
     private boolean firstTime = false;
 
@@ -49,6 +53,9 @@ public class ExpandableCardView extends LinearLayout {
 
     private int previousHeight = 0;
     private int innerViewHeight;
+    private int titleColor;
+    private int headerBackgroundColor;
+    private Drawable headerBackgroundDrawable;
 
     public ExpandableCardView(Context context) {
         super(context);
@@ -68,18 +75,21 @@ public class ExpandableCardView extends LinearLayout {
         initView(context);
     }
 
-    private void initView(Context context){
+    private void initView(Context context) {
         //Inflating View
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.expandable_cardview, this);
     }
 
-    private void initAttributes(Context context, AttributeSet attrs){
+    private void initAttributes(Context context, AttributeSet attrs) {
         //Ottengo attributi
         typedArray = context.obtainStyledAttributes(attrs, R.styleable.ExpandableCardView);
         title = typedArray.getString(R.styleable.ExpandableCardView_title);
         innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID);
+        titleColor = typedArray.getColor(R.styleable.ExpandableCardView_titleColor, getContext().getResources().getColor(android.R.color.black));
+        headerBackgroundColor = typedArray.getColor(R.styleable.ExpandableCardView_headerBackgroundColor, getContext().getResources().getColor(android.R.color.white));
+        headerBackgroundDrawable = typedArray.getDrawable(R.styleable.ExpandableCardView_headerBackgroundDrawable);
         typedArray.recycle();
     }
 
@@ -92,17 +102,37 @@ public class ExpandableCardView extends LinearLayout {
         arrowBtn = findViewById(R.id.arrow);
         textViewTitle = findViewById(R.id.title);
 
-        if(!TextUtils.isEmpty(title)) textViewTitle.setText(title);
-
         //Inflato inner view
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         containerView = findViewById(R.id.viewContainer);
-
+        //the header relative layout to set background
+        header = findViewById(R.id.header);
         innerView = inflater.inflate(innerViewRes, null);
         //innerView.setVisibility(View.INVISIBLE);
 
+        if (!TextUtils.isEmpty(title)) textViewTitle.setText(title);
+
+        header.setBackgroundColor(headerBackgroundColor);
+        textViewTitle.setTextColor(titleColor);
+        if (!(headerBackgroundDrawable == null))
+            header.setBackground(headerBackgroundDrawable);
+    }
+
+    //setting title color
+    public void setTitleColor(int resId) {
+        textViewTitle.setTextColor(getContext().getResources().getColor(resId));
+    }
+
+    //setting header color
+    public void setHeader(int resId) {
+        header.setBackgroundColor(getContext().getResources().getColor(resId));
+    }
+
+    //setting header drawable
+    public void setHeader(Drawable drawable) {
+        header.setBackground(drawable);
     }
 
     public void expand() {
@@ -110,7 +140,7 @@ public class ExpandableCardView extends LinearLayout {
         final int initialHeight = getHeight();
 
 
-        if(!isMoving()) {
+        if (!isMoving()) {
             previousHeight = initialHeight;
             containerView.addView(innerView);
         }
@@ -118,8 +148,8 @@ public class ExpandableCardView extends LinearLayout {
         measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         int targetHeight = innerView.getMeasuredHeight() + initialHeight;
 
-        if(targetHeight - initialHeight != 0) {
-            if(firstTime) {
+        if (targetHeight - initialHeight != 0) {
+            if (firstTime) {
                 containerView.getLayoutParams().height = initialHeight;
                 firstTime = false;
             }
@@ -132,7 +162,7 @@ public class ExpandableCardView extends LinearLayout {
     public void collapse() {
         int initialHeight = getMeasuredHeight();
 
-        if(initialHeight - previousHeight != 0) {
+        if (initialHeight - previousHeight != 0) {
             animateViews(initialHeight,
                     initialHeight - previousHeight,
                     COLLAPSING);
@@ -144,26 +174,26 @@ public class ExpandableCardView extends LinearLayout {
         return isExpanded;
     }
 
-    private void animateViews(final int initialHeight, final int distance, final int animationType){
+    private void animateViews(final int initialHeight, final int distance, final int animationType) {
 
         Animation expandAnimation = new Animation() {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                if (interpolatedTime == 1){
+                if (interpolatedTime == 1) {
                     //Setting isExpanding/isCollapsing to false
                     isExpanding = false;
                     isCollapsing = false;
 
-                    if(animationType == COLLAPSING){
+                    if (animationType == COLLAPSING) {
                         containerView.removeView(innerView);
                     }
                 }
 
-                    getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
-                            (int) (initialHeight - (distance * interpolatedTime));
-                    requestLayout();
+                getLayoutParams().height = animationType == EXPANDING ? (int) (initialHeight + (distance * interpolatedTime)) :
+                        (int) (initialHeight - (distance * interpolatedTime));
+                requestLayout();
 
-                Log.d("Animation", ""+containerView.getHeight() + " "+ interpolatedTime);
+                Log.d("Animation", "" + containerView.getHeight() + " " + interpolatedTime);
 
 
             }
@@ -175,9 +205,9 @@ public class ExpandableCardView extends LinearLayout {
         };
 
         RotateAnimation arrowAnimation = animationType == EXPANDING ?
-                new RotateAnimation(0,180,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f) :
-                new RotateAnimation(180,0,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                        0.5f) :
+                new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
                         0.5f);
 
         arrowAnimation.setFillAfter(true);
@@ -190,21 +220,21 @@ public class ExpandableCardView extends LinearLayout {
         isCollapsing = animationType == COLLAPSING;
 
         startAnimation(expandAnimation);
-        Log.d("SO","Started animation: "+ (animationType == EXPANDING ? "Expanding" : "Collapsing"));
+        Log.d("SO", "Started animation: " + (animationType == EXPANDING ? "Expanding" : "Collapsing"));
         arrowBtn.startAnimation(arrowAnimation);
         isExpanded = animationType == EXPANDING;
 
     }
 
-    private boolean isExpanding(){
+    private boolean isExpanding() {
         return isExpanding;
     }
 
-    private boolean isCollapsing(){
+    private boolean isCollapsing() {
         return isCollapsing;
     }
 
-    private boolean isMoving(){
+    private boolean isMoving() {
         return isExpanding() || isCollapsing();
     }
 }
