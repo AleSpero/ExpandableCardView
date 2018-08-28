@@ -9,10 +9,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val card : ExpandableCardView = findViewById(R.id.mycard)
+        val card: ExpandableCardView = findViewById(R.id.mycard)
 
         card.setOnClickListener({
-            if(card.isExpanded) card.collapse()
+            if (card.isExpanded) card.collapse()
             else card.expand()
         })
     }
