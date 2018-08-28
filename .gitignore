@@ -31,7 +31,7 @@ proguard/
 
 # Android Studio captures folder
 captures/
-
+S
 # Intellij
 *.iml
 .idea/workspace.xml
@@ -39,6 +39,8 @@ captures/
 .idea/gradle.xml
 .idea/dictionaries
 .idea/libraries
+.idea/caches
+.idea/
 
 # Keystore files
 *.jks
