@@ -15,6 +15,8 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
 
 /**
@@ -109,9 +111,9 @@ class ExpandableCardView : LinearLayout {
         //Setting attributes
         if (! TextUtils.isEmpty(title)) card_title.text = title
 
-        if (iconDrawable != null) {
+        iconDrawable?.let { drawable ->
             card_header.visibility = View.VISIBLE
-            card_icon.background = iconDrawable
+            card_icon.background = drawable
         }
 
         setInnerView(innerViewRes)
@@ -132,9 +134,7 @@ class ExpandableCardView : LinearLayout {
     }
 
     fun expand() {
-
         val initialHeight = card.height
-
         if (! isMoving) {
             previousHeight = initialHeight
         }
@@ -151,13 +151,11 @@ class ExpandableCardView : LinearLayout {
 
     fun collapse() {
         val initialHeight = card.measuredHeight
-
         if (initialHeight - previousHeight != 0) {
             animateViews(initialHeight,
                     initialHeight - previousHeight,
                     COLLAPSING)
         }
-
     }
 
     private fun animateViews(initialHeight: Int, distance: Int, animationType: Int) {
@@ -235,23 +233,22 @@ class ExpandableCardView : LinearLayout {
         this.listener = null
     }
 
-    fun setTitle(title: String) {
-        card_title.text = title
+    fun setTitle(@StringRes titleRes: Int = -1, titleText: String = "") {
+        if (titleRes != -1)
+            card_title.setText(titleRes)
+        else
+            card_title.text = titleText
     }
 
-    fun setTitle(resId: Int) {
-        card_title.setText(resId)
-    }
+    fun setIcon(@DrawableRes drawableRes: Int = -1, drawable: Drawable? = null) {
+        if (drawableRes != -1) {
+            iconDrawable = ContextCompat.getDrawable(context, drawableRes)
+            card_icon.background = iconDrawable
+        } else {
+            card_icon.background = drawable
+            iconDrawable = drawable
+        }
 
-    fun setIcon(drawable: Drawable) {
-        card_header.background = drawable
-        iconDrawable = drawable
-
-    }
-
-    fun setIcon(resId: Int) {
-        iconDrawable = ContextCompat.getDrawable(context, resId)
-        card_header.background = iconDrawable
     }
 
     private fun setInnerView(resId: Int) {
