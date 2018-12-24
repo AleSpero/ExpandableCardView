@@ -17,6 +17,8 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import com.alespero.expandablecardview.R.id.card_header
+import com.alespero.expandablecardview.R.id.card_title
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
 
 /**
@@ -41,7 +43,7 @@ import kotlinx.android.synthetic.main.expandable_cardview.view.*
  * @author Alessandro Sperotti
  */
 
-class ExpandableCardView : LinearLayout {
+class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
 
     private var title: String? = null
 
@@ -74,22 +76,17 @@ class ExpandableCardView : LinearLayout {
     private val isMoving: Boolean
         get() = isExpanding || isCollapsing
 
-    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        initAttributes(context, attrs)
+    init {
         initView(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        initAttributes(context, attrs)
-        initView(context)
+        attrs?.let {
+            initAttributes(context, attrs)
+        }
     }
 
     private fun initView(context: Context) {
         //Inflating View
-        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.expandable_cardview, this)
+        LayoutInflater.from(context).inflate(R.layout.expandable_cardview, this)
     }
 
     private fun initAttributes(context: Context, attrs: AttributeSet) {
@@ -127,20 +124,20 @@ class ExpandableCardView : LinearLayout {
         }
 
         if (expandOnClick) {
-            card.setOnClickListener(defaultClickListener)
+            card_layout.setOnClickListener(defaultClickListener)
             card_arrow.setOnClickListener(defaultClickListener)
         }
 
     }
 
     fun expand() {
-        val initialHeight = card.height
+        val initialHeight = card_layout.height
         if (! isMoving) {
             previousHeight = initialHeight
         }
 
-        card.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        val targetHeight = card.measuredHeight
+        card_layout.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val targetHeight = card_layout.measuredHeight
 
         if (targetHeight - initialHeight != 0) {
             animateViews(initialHeight,
@@ -150,7 +147,7 @@ class ExpandableCardView : LinearLayout {
     }
 
     fun collapse() {
-        val initialHeight = card.measuredHeight
+        val initialHeight = card_layout.measuredHeight
         if (initialHeight - previousHeight != 0) {
             animateViews(initialHeight,
                     initialHeight - previousHeight,
@@ -169,14 +166,14 @@ class ExpandableCardView : LinearLayout {
 
                     listener?.let { listener ->
                         if (animationType == EXPANDING) {
-                            listener.onExpandChanged(card, true)
+                            listener.onExpandChanged(card_layout, true)
                         } else {
-                            listener.onExpandChanged(card, false)
+                            listener.onExpandChanged(card_layout, false)
                         }
                     }
                 }
 
-                card.layoutParams.height = if (animationType == EXPANDING)
+                card_layout.layoutParams.height = if (animationType == EXPANDING)
                     (initialHeight + distance * interpolatedTime).toInt()
                 else
                     (initialHeight - distance * interpolatedTime).toInt()

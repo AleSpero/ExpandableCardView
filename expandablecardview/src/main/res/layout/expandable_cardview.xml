@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView android:id="@+id/card"
+<androidx.cardview.widget.CardView
+    android:id="@+id/card_layout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/default_vertical_padding"
@@ -61,7 +62,4 @@
 
 
         </LinearLayout>
-
-
-
     </androidx.cardview.widget.CardView>
