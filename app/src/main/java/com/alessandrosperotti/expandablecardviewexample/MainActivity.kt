@@ -2,19 +2,14 @@ package com.alessandrosperotti.expandablecardviewexample
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v7.widget.Toolbar
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
-import com.alespero.expandablecardview.ExpandableCardView
-import android.R.menu
 import android.content.Intent
 import android.net.Uri
-import android.view.MenuInflater
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.location.*
 
 
@@ -26,12 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(main_toolbar)
 
-        val collapsingToolbarLayout = findViewById<CollapsingToolbarLayout>(R.id.ctl)
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE)
-        collapsingToolbarLayout.setExpandedTitleTextColor(ColorStateList.valueOf(Color.WHITE))
+        main_collapsing_toolbar_layout.setCollapsedTitleTextColor(Color.WHITE)
+        main_collapsing_toolbar_layout.setExpandedTitleTextColor(ColorStateList.valueOf(Color.WHITE))
 
         buttonMaps.setOnClickListener {
             val uri = Uri.parse("geo:25.7906500,-80.1300500?q=Miami Beach&z=10")
@@ -39,10 +32,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-        val card : ExpandableCardView = findViewById(R.id.profile)
-
-        card.setOnExpandedListener { _, isExpanded ->
+        main_profile_card.setOnExpandedListener { _, isExpanded ->
             if(isExpanded) Toast.makeText(applicationContext, "Expanded!", Toast.LENGTH_SHORT).show()
             else Toast.makeText(applicationContext, "Collapsed!", Toast.LENGTH_SHORT).show()
         }

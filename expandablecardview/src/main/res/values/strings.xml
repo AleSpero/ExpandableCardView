@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">expandablecardview</string>
+    <string name="expandable_card_view_image_content_description">Arrow to expand card</string>
+    <string name="expandable_card_view_icon_content_description">Card icon</string>
 </resources>
