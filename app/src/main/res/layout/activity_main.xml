@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_height="252dp"
         android:layout_width="match_parent"
         android:fitsSystemWindows="true">
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/ctl"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/main_collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -25,16 +25,16 @@
                 android:adjustViewBounds="true"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"/>
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
                 android:theme="@style/toolbarTheme"
                 app:layout_collapseMode="pin"/>
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-<android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+<androidx.core.widget.NestedScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -53,7 +53,7 @@
 
 
 <com.alespero.expandablecardview.ExpandableCardView
-    android:id="@+id/profile"
+    android:id="@+id/main_profile_card"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:layout_marginTop="10dp"
@@ -66,7 +66,7 @@
     app:expandOnClick="true" />
 
     <com.alespero.expandablecardview.ExpandableCardView
-        android:id="@+id/location"
+        android:id="@+id/main_location"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
         app:expandOnClick="true"/>
 
     <com.alespero.expandablecardview.ExpandableCardView
-        android:id="@+id/dates"
+        android:id="@+id/main_dates"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -94,5 +94,5 @@
 
 </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
