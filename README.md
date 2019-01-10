@@ -8,7 +8,7 @@ An Android library that lets you create in a simple, fast and hassle-free way a 
 
 This component follows the [Material Design Guidelines](https://material.io/guidelines/).
 
-Please note that this library is still in early development stage!
+### Important: due to time issues, in the near future there will not be any kind of updates or fixes. PR however will be reviewed and very much appreciated.
 
 ## Demo
 
