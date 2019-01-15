@@ -89,6 +89,18 @@ card.setOnExpandedListener { view, isExpanded ->
     Toast.makeText(applicationContext, if(isExpanded) "Expanded!" else "Collapsed!", Toast.LENGTH_SHORT).show()
  }
 ```
+
+DataBinding can be used with the inner view.
+### Kotlin
+```kotlin
+        //Bind the viewmodel to the expandable settings section
+            val expandableSectionBinding = expandableOptions.BindToInnerView<DataEntryOptionsMenuBinding>()
+
+            if (expandableSectionBinding != null)
+            {
+                expandableSectionBinding.viewModel = viewModel
+            }
+```
 ## Contribute
 
 This library is still in its early stages, so feel free to contribute. I will review any Pull Request in 24-48 hours.

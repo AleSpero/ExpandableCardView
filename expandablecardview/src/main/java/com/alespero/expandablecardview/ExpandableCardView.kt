@@ -17,8 +17,8 @@ import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.alespero.expandablecardview.R.id.card_header
-import com.alespero.expandablecardview.R.id.card_title
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
 
 /**
@@ -128,6 +128,15 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             card_arrow.setOnClickListener(defaultClickListener)
         }
 
+    }
+
+    fun <T : ViewDataBinding?> BindToInnerView(): T? {
+        if (innerView == null) {
+            return null
+        } else {
+            return DataBindingUtil.bind<T>(innerView!!)
+
+        }
     }
 
     fun expand() {
