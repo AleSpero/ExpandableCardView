@@ -241,9 +241,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (drawableRes != -1) {
             iconDrawable = ContextCompat.getDrawable(context, drawableRes)
             card_icon.background = iconDrawable
+            card_icon.visibility = View.VISIBLE
         } else {
             card_icon.background = drawable
             iconDrawable = drawable
+            card_icon.visibility = View.VISIBLE
         }
 
     }
