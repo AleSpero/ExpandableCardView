@@ -19,7 +19,7 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
-compile 'com.alespero:expandable-cardview:0.8'
+implementation 'com.alespero:expandable-cardview:0.8'
 ```
 
 Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
@@ -70,6 +70,14 @@ val card : ExpandableCardView = findViewById(R.id.profile)
 
 You can use ```expand()``` and ```collapse()``` to respectively expand and collapse the card, and use ```isExpanded()``` to check if the card is expanded or not.
 You can change the title and icon of the card dynamically by using ```setTitle()``` and ```setIcon()``` methods.
+
+To programmatically set whether or not the cardview is expandable, use ```setIsExpandable(isExpandable: Boolean)```.
+
+To customize the right indicator, instead of using the default arrow indicator, use ```setIndicator(@DrawableRes drawableRes: Int = -1, drawable: Drawable? = null)```.  
+
+If you do not want to have the right indicator, use ```removeIndicator()```. It is especially useful if the cardview is not expandable. 
+
+Use ``` fun setTitle(@StringRes titleRes: Int = -1, titleText: String = "", textSize: Float = 16f, textColor: Int = ContextCompat.getColor(context android.R.color.primary_text_light)) ``` to customise the text, text size and text color.
 
 You can also set an OnExpandedListener to the card:
 
