@@ -136,8 +136,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             previousHeight = initialHeight
         }
 
-        card_layout.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        val targetHeight = card_layout.measuredHeight
+        val targetHeight = getFullHeight(card_layout)
 
         if (targetHeight - initialHeight != 0) {
             animateViews(initialHeight,
@@ -146,6 +145,33 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
     }
 
+    /***
+     * This function returns the actual height the layout. The getHeight() function returns the current height which might be zero if
+     * the layout's visibility is GONE
+     * @param layout
+     * @return
+     */
+    private fun getFullHeight(layout: ViewGroup): Int {
+        val specWidth = MeasureSpec.makeMeasureSpec(0 /* any */, MeasureSpec.UNSPECIFIED)
+        val specHeight = MeasureSpec.makeMeasureSpec(0 /* any */, MeasureSpec.UNSPECIFIED)
+        layout.measure(specWidth, specHeight)
+        var totalHeight = 0 //layout.getMeasuredHeight();
+        val initialVisibility = layout.visibility
+        layout.visibility = View.VISIBLE
+        val numberOfChildren = layout.childCount
+        for (i in 0 until numberOfChildren) {
+            val child = layout.getChildAt(i)
+
+            val desiredWidth = MeasureSpec.makeMeasureSpec(layout.width,
+                    MeasureSpec.AT_MOST)
+            child.measure(desiredWidth, MeasureSpec.UNSPECIFIED)
+            child.measuredHeight
+            totalHeight+=child.measuredHeight
+        }
+        layout.visibility = initialVisibility
+        return totalHeight
+    }
+    
     fun collapse() {
         val initialHeight = card_layout.measuredHeight
         if (initialHeight - previousHeight != 0) {
