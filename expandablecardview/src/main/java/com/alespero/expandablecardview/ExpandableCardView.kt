@@ -5,20 +5,19 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.Build
-import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.alespero.expandablecardview.R.id.card_header
-import com.alespero.expandablecardview.R.id.card_title
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
 
 /**
@@ -106,7 +105,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         super.onFinishInflate()
 
         //Setting attributes
-        if (! TextUtils.isEmpty(title)) card_title.text = title
+        if (!TextUtils.isEmpty(title)) card_title.text = title
 
         iconDrawable?.let { drawable ->
             card_header.visibility = View.VISIBLE
@@ -132,7 +131,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun expand() {
         val initialHeight = card_layout.height
-        if (! isMoving) {
+        if (!isMoving) {
             previousHeight = initialHeight
         }
 
@@ -230,7 +229,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         this.listener = null
     }
 
-    fun setTitle(@StringRes titleRes: Int = -1, titleText: String = "") {
+
+    fun setTitle(@StringRes titleRes: Int = -1, titleText: String = "", textSize: Float = 16f,
+                 textColor: Int = ContextCompat.getColor(context, android.R.color.primary_text_light)) {
+
+        card_title.textSize = textSize
+        card_title.setTextColor(textColor)
+
         if (titleRes != -1)
             card_title.setText(titleRes)
         else
@@ -241,11 +246,48 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (drawableRes != -1) {
             iconDrawable = ContextCompat.getDrawable(context, drawableRes)
             card_icon.background = iconDrawable
+            card_icon.visibility = View.VISIBLE
         } else {
             card_icon.background = drawable
             iconDrawable = drawable
+            card_icon.visibility = View.VISIBLE
         }
+    }
 
+    /**
+     * Programmatically set whether or not the cardview is expandable
+     */
+    fun setIsExpandable(isExpandable: Boolean) {
+        if (isExpandable) {
+            card_layout.setOnClickListener(defaultClickListener)
+            card_arrow.setOnClickListener(defaultClickListener)
+        } else {
+            card_layout.setOnClickListener(null)
+            card_arrow.setOnClickListener(null)
+        }
+    }
+
+    /**
+     * Set the drawable for the right icon
+     */
+    fun setIndicator(@DrawableRes drawableRes: Int = -1, drawable: Drawable? = null) {
+        if (drawableRes != -1) {
+            iconDrawable = ContextCompat.getDrawable(context, drawableRes)
+            card_arrow.setImageDrawable(iconDrawable)
+            card_arrow.visibility = View.VISIBLE
+        } else {
+            iconDrawable = drawable
+            card_arrow.setImageDrawable(iconDrawable)
+            card_arrow.visibility = View.VISIBLE
+        }
+    }
+
+    /**
+     * Removes the right indicator and it's OnClickListener -- useful if the cardview is set to be not expandable
+     */
+    fun removeIndicator() {
+        card_arrow.visibility = View.INVISIBLE
+        card_arrow.setOnClickListener(null)
     }
 
     private fun setInnerView(resId: Int) {
