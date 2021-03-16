@@ -10,7 +10,9 @@ ext {
 
 android {
     compileSdkVersion 28
-
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 28
