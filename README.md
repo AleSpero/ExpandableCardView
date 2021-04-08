@@ -2,7 +2,9 @@
 
 [ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.8/link)
 
-![Example Gif](demo.gif)
+<p align="center">
+    <img src="demo.gif"> 
+</p>
 
 An Android library that lets you create in a simple, fast and hassle-free way a CardView in which you can insert your custom layout and just expand and collapse without even writing a single Java/Kotlin line of code.
 
