@@ -17,7 +17,7 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
-compile 'com.alespero:expandable-cardview:0.8'
+implementation 'com.alespero:expandable-cardview:0.8'
 ```
 
 Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
